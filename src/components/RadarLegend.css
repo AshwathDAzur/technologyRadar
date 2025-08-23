@@ -1,0 +1,169 @@
+.radar-legend {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.radar-legend h3 {
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.8rem;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 1rem;
+}
+
+.legend-content {
+  display: grid;
+  gap: 2rem;
+}
+
+.legend-section {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 2px solid #e9ecef;
+}
+
+.legend-section h4 {
+  color: #2c3e50;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.ring-explanations {
+  display: grid;
+  gap: 1rem;
+}
+
+.ring-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  border-left: 4px solid;
+}
+
+.ring-item.adopt {
+  border-left-color: #27ae60;
+}
+
+.ring-item.trial {
+  border-left-color: #f39c12;
+}
+
+.ring-item.assess {
+  border-left-color: #3498db;
+}
+
+.ring-item.hold {
+  border-left-color: #e74c3c;
+}
+
+.ring-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.ring-color.adopt {
+  background: #27ae60;
+}
+
+.ring-color.trial {
+  background: #f39c12;
+}
+
+.ring-color.assess {
+  background: #3498db;
+}
+
+.ring-color.hold {
+  background: #e74c3c;
+}
+
+.ring-item strong {
+  color: #2c3e50;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.ring-item p {
+  margin: 0;
+  color: #7f8c8d;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.quadrant-explanations {
+  display: grid;
+  gap: 1rem;
+}
+
+.quadrant-item {
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.quadrant-item strong {
+  color: #2c3e50;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.quadrant-item p {
+  margin: 0;
+  color: #7f8c8d;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.legend-section ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: #7f8c8d;
+}
+
+.legend-section li {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.legend-section li strong {
+  color: #2c3e50;
+}
+
+@media (max-width: 768px) {
+  .radar-legend {
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
+  
+  .radar-legend h3 {
+    font-size: 1.5rem;
+  }
+  
+  .legend-section {
+    padding: 1rem;
+  }
+  
+  .ring-item {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .ring-color {
+    align-self: flex-start;
+  }
+}
