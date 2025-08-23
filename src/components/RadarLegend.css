@@ -1,169 +1,347 @@
 .radar-legend {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 15px;
-  padding: 2rem;
-  margin: 2rem 0;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  overflow-y: auto;
 }
 
-.radar-legend h3 {
-  color: #2c3e50;
-  margin-bottom: 2rem;
+.radar-legend::-webkit-scrollbar {
+  width: 8px;
+}
+
+.radar-legend::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.radar-legend::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.radar-legend::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.legend-header {
   text-align: center;
-  font-size: 1.8rem;
-  border-bottom: 3px solid #667eea;
-  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #f3f4f6;
+  flex-shrink: 0;
 }
 
-.legend-content {
+.legend-header h3 {
+  margin: 0 0 1rem 0;
+  color: #1f2937;
+  font-size: 1.6rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.legend-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.legend-grid {
   display: grid;
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex: 1;
 }
 
-.legend-section {
-  background: #f8f9fa;
+.legend-item {
+  background: white;
   border-radius: 12px;
   padding: 1.5rem;
-  border: 2px solid #e9ecef;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.legend-section h4 {
-  color: #2c3e50;
-  margin: 0 0 1.5rem 0;
-  font-size: 1.3rem;
+.legend-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--item-color);
+  transition: height 0.3s ease;
+}
+
+.legend-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border-color: var(--item-color);
+}
+
+.legend-item:hover::before {
+  height: 6px;
+}
+
+.legend-header-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.legend-color-indicator {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.legend-header-section h4 {
+  margin: 0;
+  color: #1f2937;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.legend-description {
+  margin: 0 0 1.25rem 0;
+  color: #6b7280;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.legend-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.examples-label {
+  color: #9ca3af;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.example-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.example-tag {
+  background: #f3f4f6;
+  color: #374151;
+  padding: 0.3rem 0.6rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.example-tag:hover {
+  background: var(--item-color);
+  color: white;
+  border-color: var(--item-color);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.legend-footer {
+  padding-top: 1.5rem;
+  border-top: 2px solid #f3f4f6;
+  flex-shrink: 0;
+}
+
+.legend-note {
+  max-width: 100%;
+}
+
+.legend-note h4 {
+  margin: 0 0 1.25rem 0;
+  color: #1f2937;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.legend-note ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.75rem;
+}
+
+.legend-note li {
+  background: #f8fafc;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border-left: 3px solid #667eea;
+  color: #374151;
+  line-height: 1.4;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.legend-note li:hover {
+  background: #f1f5f9;
+  transform: translateX(3px);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+.legend-note strong {
+  color: #1f2937;
   font-weight: 600;
 }
 
-.ring-explanations {
-  display: grid;
-  gap: 1rem;
-}
-
-.ring-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 1rem;
-  background: white;
-  border-radius: 8px;
-  border-left: 4px solid;
-}
-
-.ring-item.adopt {
-  border-left-color: #27ae60;
-}
-
-.ring-item.trial {
-  border-left-color: #f39c12;
-}
-
-.ring-item.assess {
-  border-left-color: #3498db;
-}
-
-.ring-item.hold {
-  border-left-color: #e74c3c;
-}
-
-.ring-color {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-top: 0.25rem;
-}
-
-.ring-color.adopt {
-  background: #27ae60;
-}
-
-.ring-color.trial {
-  background: #f39c12;
-}
-
-.ring-color.assess {
-  background: #3498db;
-}
-
-.ring-color.hold {
-  background: #e74c3c;
-}
-
-.ring-item strong {
-  color: #2c3e50;
-  font-size: 1.1rem;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.ring-item p {
-  margin: 0;
-  color: #7f8c8d;
-  line-height: 1.5;
-  font-size: 0.95rem;
-}
-
-.quadrant-explanations {
-  display: grid;
-  gap: 1rem;
-}
-
-.quadrant-item {
-  padding: 1rem;
-  background: white;
-  border-radius: 8px;
-  border-left: 4px solid #667eea;
-}
-
-.quadrant-item strong {
-  color: #2c3e50;
-  font-size: 1.1rem;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.quadrant-item p {
-  margin: 0;
-  color: #7f8c8d;
-  line-height: 1.5;
-  font-size: 0.95rem;
-}
-
-.legend-section ul {
-  margin: 0;
-  padding-left: 1.5rem;
-  color: #7f8c8d;
-}
-
-.legend-section li {
-  margin-bottom: 0.75rem;
-  line-height: 1.6;
-}
-
-.legend-section li strong {
-  color: #2c3e50;
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .radar-legend {
+    padding: 1.25rem;
+  }
+  
+  .legend-header h3 {
+    font-size: 1.4rem;
+  }
+  
+  .legend-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+  }
+  
+  .legend-item {
+    padding: 1.25rem;
+  }
+  
+  .legend-header-section h4 {
+    font-size: 1.1rem;
+  }
 }
 
 @media (max-width: 768px) {
   .radar-legend {
-    padding: 1.5rem;
-    margin: 1rem 0;
-  }
-  
-  .radar-legend h3 {
-    font-size: 1.5rem;
-  }
-  
-  .legend-section {
     padding: 1rem;
   }
   
-  .ring-item {
-    flex-direction: column;
-    gap: 0.5rem;
+  .legend-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
   }
   
-  .ring-color {
-    align-self: flex-start;
+  .legend-header h3 {
+    font-size: 1.3rem;
+  }
+  
+  .legend-header p {
+    font-size: 0.9rem;
+  }
+  
+  .legend-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .legend-item {
+    padding: 1rem;
+  }
+  
+  .legend-header-section h4 {
+    font-size: 1rem;
+  }
+  
+  .legend-description {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  
+  .legend-note ul {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+  
+  .legend-note li {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .radar-legend {
+    padding: 0.75rem;
+  }
+  
+  .legend-header {
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+  }
+  
+  .legend-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .legend-header p {
+    font-size: 0.85rem;
+  }
+  
+  .legend-grid {
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .legend-item {
+    padding: 0.75rem;
+  }
+  
+  .legend-header-section h4 {
+    font-size: 0.9rem;
+  }
+  
+  .legend-description {
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .example-tags {
+    gap: 0.3rem;
+  }
+  
+  .example-tag {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7rem;
+  }
+  
+  .legend-footer {
+    padding-top: 1.25rem;
+  }
+  
+  .legend-note h4 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .legend-note li {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
   }
 }

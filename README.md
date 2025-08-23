@@ -4,7 +4,8 @@ A modern React application for organizations to visualize and manage their techn
 
 ## Features
 
-- **Excel Integration**: Upload Excel files with multiple sheets representing different groups
+- **Excel File Integration**: Automatically loads technology radar data from an Excel file in the public directory
+- **Pre-configured Teams**: Includes sample data for Frontend, Backend, and DevOps teams
 - **Four Quadrants**: Organize technologies by category:
   - Tools & Technology
   - Products & Libraries
@@ -17,7 +18,7 @@ A modern React application for organizations to visualize and manage their techn
   - **Hold**: Not recommended for new projects
 - **Group Management**: Switch between different organizational groups
 - **Responsive Design**: Works on desktop and mobile devices
-- **Template Download**: Get started with a sample Excel template
+- **Easy Customization**: Modify the Excel file to add your own teams and technologies
 
 ## Getting Started
 
@@ -46,19 +47,21 @@ npm start
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+The application will automatically load with technology radar data from the Excel file located at `public/technology_radar_data.xlsx`.
+
 ### Building for Production
 
 ```bash
 npm run build
 ```
 
-## Excel File Format
+## Excel File Structure
 
-The application expects Excel files with the following structure:
+The application reads from an Excel file located at `public/technology_radar_data.xlsx`. Each sheet represents a different team in your organization.
 
 ### Sheet Structure
-- **Each sheet represents one group** (e.g., "Frontend Team", "Backend Team", "DevOps")
-- **Sheet names become group names** in the application
+- **Each sheet represents one team** (e.g., "Frontend Team", "Backend Team", "DevOps")
+- **Sheet names become team names** in the application
 
 ### Column Structure
 | Column | Description | Required |
@@ -92,10 +95,60 @@ Kubernetes  | Platforms                  | Assess | Container orchestration
 
 ## Usage
 
-1. **Upload Excel File**: Drag and drop or click to select an Excel file
-2. **Select Group**: Choose which group's technology radar to view
+1. **Automatic Data Loading**: Data loads automatically from the Excel file when the application starts
+2. **Select Group**: Choose which team's technology radar to view from the dropdown
 3. **Analyze Technologies**: View technologies organized by quadrant and ring
 4. **Make Decisions**: Use the radar to inform technology strategy
+
+## Customization
+
+### Adding Your Own Data
+
+To add your own teams and technologies, modify the Excel file `public/technology_radar_data.xlsx`:
+
+1. **Add a new sheet** for each team
+2. **Use the exact column headers**: Name, Quadrant, Ring, Description, Notes
+3. **Ensure quadrants match exactly**: Tools & Technology, Products & Libraries, Languages & Frameworks, Platforms
+4. **Use valid ring values**: Adopt, Trial, Assess, Hold
+
+### Excel File Requirements
+
+- **File location**: Must be placed in the `public/` directory
+- **File name**: Must be `technology_radar_data.xlsx`
+- **Format**: Excel (.xlsx) format
+- **Sheets**: Each team should have its own sheet
+- **Headers**: First row should contain column headers
+
+### Adding New Quadrants
+
+Update the `quadrants` object in `TechnologyRadar.js` to include new categories:
+
+```javascript
+const quadrants = {
+  'Tools & Technology': [],
+  'Products & Libraries': [],
+  'Languages & Frameworks': [],
+  'Platforms': [],
+  'Your New Quadrant': []  // Add here
+};
+```
+
+### Adding New Rings
+
+Update the `getRingClass` function in `TechnologyRadar.js`:
+
+```javascript
+const getRingClass = (ring) => {
+  switch (ring.toLowerCase()) {
+    case 'adopt': return 'ring-adopt';
+    case 'trial': return 'ring-trial';
+    case 'assess': return 'ring-assess';
+    case 'hold': return 'ring-hold';
+    case 'your-new-ring': return 'ring-your-new-ring';  // Add here
+    default: return 'ring-unknown';
+  }
+};
+```
 
 ## Technology Stack
 
@@ -110,43 +163,13 @@ Kubernetes  | Platforms                  | Assess | Container orchestration
 src/
 ├── components/
 │   ├── TechnologyRadar.js    # Main radar visualization
-│   ├── FileUpload.js         # Excel file upload and parsing
 │   ├── RadarLegend.js        # Legend and explanations
 │   └── *.css                 # Component-specific styles
 ├── App.js                    # Main application component
 ├── index.js                  # Application entry point
 └── *.css                     # Global styles
-```
-
-## Customization
-
-### Adding New Quadrants
-Modify the `quadrants` object in `TechnologyRadar.js`:
-
-```javascript
-const quadrants = {
-  'Tools & Technology': [],
-  'Products & Libraries': [],
-  'Languages & Frameworks': [],
-  'Platforms': [],
-  'Your New Quadrant': []  // Add here
-};
-```
-
-### Adding New Rings
-Update the `getRingClass` function in `TechnologyRadar.js`:
-
-```javascript
-const getRingClass = (ring) => {
-  switch (ring.toLowerCase()) {
-    case 'adopt': return 'ring-adopt';
-    case 'trial': return 'ring-trial';
-    case 'assess': return 'ring-assess';
-    case 'hold': return 'ring-hold';
-    case 'your-new-ring': return 'ring-your-new-ring';  // Add here
-    default: return 'ring-unknown';
-  }
-};
+public/
+└── technology_radar_data.xlsx # Excel file with technology data
 ```
 
 ## Contributing
@@ -173,3 +196,4 @@ For questions or issues, please open an issue in the repository.
 - [ ] Integration with project management tools
 - [ ] Advanced filtering and search
 - [ ] Technology lifecycle management
+- [ ] Excel file upload functionality (optional feature)
