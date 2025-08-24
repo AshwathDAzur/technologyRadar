@@ -1,0 +1,27 @@
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Abstract Icon (Left) -->
+  <g transform="translate(10, 10)">
+    <!-- Main teal shapes -->
+    <path d="M15 20 Q25 15 25 25 Q25 35 15 30 Q5 25 5 20 Q5 15 15 20" fill="#2db7bc"/>
+    <path d="M25 20 Q35 15 35 25 Q35 35 25 30 Q15 25 15 20 Q15 15 25 20" fill="#2db7bc"/>
+    
+    <!-- Yellow dots -->
+    <circle cx="5" cy="10" r="2" fill="#dcd500"/>
+    <circle cx="35" cy="10" r="2" fill="#dcd500"/>
+    <circle cx="5" cy="40" r="2" fill="#dcd500"/>
+    <circle cx="35" cy="40" r="2" fill="#dcd500"/>
+  </g>
+  
+  <!-- Text (Right) -->
+  <g transform="translate(60, 15)">
+    <!-- PSIOg text -->
+    <text x="0" y="25" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#dcd500">
+      PSIOg
+    </text>
+    
+    <!-- DIGITAL text -->
+    <text x="8" y="40" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#2db7bc">
+      DIGITAL
+    </text>
+  </g>
+</svg>
