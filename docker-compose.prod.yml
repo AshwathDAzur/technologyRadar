@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # Production service
+  app-prod:
+    build:
+      context: .
+      target: production
+    container_name: tech-radar-prod
+    ports:
+      - "80:80"
+    volumes:
+      # Map public directory for Excel file updates
+      - ./public:/usr/share/nginx/html/public
+      # Map nginx logs
+      - nginx-logs:/var/log/nginx
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  nginx-logs:
+    driver: local
