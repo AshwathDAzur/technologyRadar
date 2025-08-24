@@ -10,8 +10,57 @@ A React-based application for creating and visualizing technology radar charts t
 - **Group Selection**: Switch between different technology groups
 - **Responsive Design**: Works on desktop and mobile devices
 - **Professional Branding**: PSIOg DIGITAL logo and theme integration
+- **Docker Support**: Full containerization with hot reload for development
 
-## Getting Started
+## 🐳 Quick Start with Docker (Recommended)
+
+### Prerequisites
+- Docker Desktop installed and running
+- Make (optional, for using Makefile commands)
+
+### Development Environment with Hot Reload
+```bash
+# Start development environment with hot reload
+make dev
+
+# Access the application:
+# - React App (Direct): http://localhost:3000
+# - Nginx Proxy: http://localhost:8080
+```
+
+### Production Environment
+```bash
+# Start production environment
+make prod
+
+# Access the application:
+# - Production App: http://localhost:80
+```
+
+### Available Docker Commands
+```bash
+# Show all available commands
+make help
+
+# Development
+make build-dev      # Build development image
+make up-dev         # Start development environment
+make down-dev       # Stop development environment
+make logs-dev       # View development logs
+
+# Production
+make build-prod     # Build production image
+make up-prod        # Start production environment
+make down-prod      # Stop production environment
+make logs-prod      # View production logs
+
+# Utility
+make clean          # Remove all containers, images, and volumes
+```
+
+**For detailed Docker documentation, see [DOCKER.md](DOCKER.md)**
+
+## 🚀 Traditional Setup (Without Docker)
 
 ### Prerequisites
 
@@ -124,6 +173,12 @@ To customize the branding:
 1. Check that all CSS files are properly imported
 2. Verify the logo file exists at `public/logo.svg`
 3. Ensure the app is running the latest version
+
+### Docker Issues
+
+1. Check [DOCKER.md](DOCKER.md) for detailed troubleshooting
+2. Ensure Docker Desktop is running
+3. Check container logs with `make logs-dev` or `make logs-prod`
 
 ## Contributing
 

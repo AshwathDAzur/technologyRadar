@@ -1,0 +1,67 @@
+services:
+  # Development service with hot reload
+  app-dev:
+    build:
+      context: .
+      target: development
+    container_name: tech-radar-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      # Map source code for hot reload
+      - .:/app
+      # Map node_modules to avoid conflicts
+      - /app/node_modules
+      # Map public directory for Excel file changes
+      - ./public:/app/public
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - FAST_REFRESH=true
+    stdin_open: true
+    tty: true
+    networks:
+      - tech-radar-network
+
+  # Production service
+  app-prod:
+    build:
+      context: .
+      target: production
+    container_name: tech-radar-prod
+    ports:
+      - "80:80"
+    volumes:
+      # Map public directory for Excel file updates
+      - ./public:/usr/share/nginx/html/public
+      # Map nginx logs
+      - nginx-logs:/var/log/nginx
+    environment:
+      - NODE_ENV=production
+    networks:
+      - tech-radar-network
+    depends_on:
+      - app-dev
+
+  # Nginx reverse proxy for development
+  nginx-dev:
+    image: nginx:alpine
+    container_name: tech-radar-nginx-dev
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx-dev.conf:/etc/nginx/nginx.conf
+      - ./public:/usr/share/nginx/html/public
+    networks:
+      - tech-radar-network
+    depends_on:
+      - app-dev
+
+volumes:
+  nginx-logs:
+    driver: local
+
+networks:
+  tech-radar-network:
+    driver: bridge
